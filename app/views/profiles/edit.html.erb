@@ -1,0 +1,36 @@
+<% content_for(:title, 'Edit Profile') %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <h1>Edit Profile</h1>
+            <%= form_with model: @user, url: profile_path, local: true do |f| %>
+                <%= render "shared/error_messages", object: f.object %>
+                    <div class="form-group">
+                        <%= f.label :email %>
+                        <%= f.email_field :email, class: "form-control mb-3" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :name %>
+                        <%= f.text_field :name, class: "form-control mb-3" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :weight %>
+                        <%= f.number_field :weight, class: "form-control mb-3" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :age %>
+                        <%= f.number_field :age, class: "form-control mb-3" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :gender %>
+                        <%= f.select :gender, User.genders.keys, {}, class: "form-control mb-3" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :area %>
+                        <%= f.select :area, User.areas.keys, {}, class: "form-control mb-3" %>
+                    </div>
+                    <%= f.submit 'Save Changes', class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>
