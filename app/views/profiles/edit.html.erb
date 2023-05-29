@@ -15,19 +15,19 @@
                     </div>
                     <div class="form-group">
                         <%= f.label :weight %>
-                        <%= f.number_field :weight, class: "form-control mb-3" %>
+                        <%= f.select :weight, (30..150), { include_blank: true }, class: "form-control mb-3" %>
                     </div>
                     <div class="form-group">
                         <%= f.label :age %>
-                        <%= f.number_field :age, class: "form-control mb-3" %>
+                        <%= f.select :age, (13..100), { include_blank: true }, class: "form-control mb-3" %>
                     </div>
                     <div class="form-group">
                         <%= f.label :gender %>
-                        <%= f.select :gender, User.genders.keys, {}, class: "form-control mb-3" %>
+                        <%= f.select :gender, User.genders.keys, { include_blank: true }, class: "form-control mb-3" %>
                     </div>
                     <div class="form-group">
                         <%= f.label :area %>
-                        <%= f.select :area, User.areas.keys, {}, class: "form-control mb-3" %>
+                        <%= f.select :area, User.areas.keys, { include_blank: true }, class: "form-control mb-3" %>
                     </div>
                     <%= f.submit 'Save Changes', class: "btn btn-primary" %>
             <% end %>
