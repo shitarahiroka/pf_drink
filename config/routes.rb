@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'drinks/suggestion', to: 'drinks#suggestion', as: 'drinks_suggestion'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
@@ -10,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :profile, only: %i[show edit update]
+  resources :drinks do
+    collection do
+      post :suggestion
+    end
+  end
   # Defines the root path route ("/")
   root "tops#index"
 end
