@@ -13,11 +13,11 @@ class DrinksController < ApplicationController
     mood = params[:mood]
     calorie_preference = params[:calorie_preference]
     # ユーザープロフィールのカフェイン制限値
-    caffeine_limit = calculate_caffeine_limit
+    caffeine_limit = calculate_caffeine_limit.to_f
 
     # ドリンクデータベースからドリンク情報を取得
     drinks_data = Drink.all
-    #binding.break
+    binding.break
 
     morning_drinks = []
     afternoon_drinks = []
@@ -35,7 +35,7 @@ class DrinksController < ApplicationController
         if study_time.present? && study_time.include?('evening')
           evening_drinks << drink
         end
-      elsif study_time.present? && (!study_time.include?('morning') || !study_time.include?('afternoon') || !study_time.include?('evening'))
+      elsif !study_time.present? || (!study_time.include?('morning') || !study_time.include?('afternoon') || !study_time.include?('evening'))
         if drink[:caffeine] <= 30.0 || drink[:mood] == 'リラックスしながら'
           morning_drinks << drink
           afternoon_drinks << drink
@@ -85,7 +85,7 @@ class DrinksController < ApplicationController
   private
 
   def drink_params
-    params.require(:drink).permit(:study_time, :mood, :calorie_preference)
+    params.require(:drink).permit(:mood).merge(study_time: params[:study_time], calorie_preference: params[:calorie_preference])
   end
 
   def calculate_caffeine_limit
