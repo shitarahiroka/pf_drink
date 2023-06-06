@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_032150) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_071257) do
+  create_table "drink_records", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "morning_suggestion"
+    t.string "afternoon_suggestion"
+    t.string "evening_suggestion"
+    t.float "caffeine_total"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_drink_records_on_user_id"
+  end
+
   create_table "drinks", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.float "calories"
@@ -35,4 +47,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_032150) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "drink_records", "users"
 end
