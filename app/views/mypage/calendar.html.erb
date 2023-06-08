@@ -2,4 +2,8 @@
 <%= link_to "ドリンク提案フォームへ", new_drink_path %>
 <%= month_calendar do |date| %>
     <%= date.day %>
+    <% drink_record = @drink_records.find { |record| record.date == date } %>
+    <% if drink_record %>
+        <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
+    <% end %>
 <% end %>

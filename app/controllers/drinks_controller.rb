@@ -17,7 +17,7 @@ class DrinksController < ApplicationController
 
     # ドリンクデータベースからドリンク情報を取得
     drinks_data = Drink.all
-    binding.break
+    # binding.break
 
     morning_drinks = []
     afternoon_drinks = []
@@ -85,7 +85,7 @@ class DrinksController < ApplicationController
   private
 
   def drink_params
-    params.require(:drink).permit(:mood).merge(study_time: params[:study_time], calorie_preference: params[:calorie_preference])
+    params.require(:drink).permit(:mood, :study_time, :calorie_preference)
   end
 
   def calculate_caffeine_limit

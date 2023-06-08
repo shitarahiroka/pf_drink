@@ -1,8 +1,8 @@
 <%= form_with(url: drinks_path, method: :post) do |form| %>
     <%= form.fields_for :drink do |drink_form| %>
       <div class="field">
-        <%= drink_form.label :study_time, '今日の学習時間帯は？' %>
-        <%= drink_form.select :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], {}, multiple: true, class: 'form-control' %>
+        <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？' %>
+        <%= drink_form.select :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], {}, class: 'form-control' %>
       </div>
   
       <div class="field">
