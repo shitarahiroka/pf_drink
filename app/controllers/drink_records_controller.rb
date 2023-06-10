@@ -8,6 +8,10 @@ class DrinkRecordsController < ApplicationController
         end
     end
 
+    def show
+        @drink_record = DrinkRecord.find(params[:id])
+    end
+
     private
 
     def drink_record_params

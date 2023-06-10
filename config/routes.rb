@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       post :suggestion
     end
   end
-  resources :drink_records, only: %i[create]
+  resources :drink_records, only: %i[create show]
   # Defines the root path route ("/")
   root "tops#index"
 end
