@@ -15,7 +15,21 @@ class DrinkRecordsController < ApplicationController
     private
 
     def drink_record_params
-        params.permit(:morning_suggestion, :afternoon_suggestion, :evening_suggestion, :caffeine_total, :date).merge(user: current_user)
+        morning_suggestion_id = params[:morning_suggestion]
+        afternoon_suggestion_id = params[:afternoon_suggestion]
+        evening_suggestion_id = params[:evening_suggestion]
+
+        # ドリンクデータベースから対応するドリンクオブジェクトを取得
+        morning_suggestion = Drink.find(morning_suggestion_id)
+        afternoon_suggestion = Drink.find(afternoon_suggestion_id)
+        evening_suggestion = Drink.find(evening_suggestion_id)
+
+        params.permit(:caffeine_total, :date).merge(
+            user: current_user,
+            morning_suggestion: morning_suggestion,
+            afternoon_suggestion: afternoon_suggestion,
+            evening_suggestion: evening_suggestion
+        )
     end
 
 end

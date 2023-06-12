@@ -1,7 +1,7 @@
 <h1>今日のドリンク</h1>
 
 <p><strong>Date:</strong> <%= @drink_record.date %></p>
-<p><strong>Morning Suggestion:</strong> <%= @drink_record.morning_suggestion %></p>
-<p><strong>Afternoon Suggestion:</strong> <%= @drink_record.afternoon_suggestion %></p>
-<p><strong>Evening Suggestion:</strong> <%= @drink_record.evening_suggestion %></p>
+<p><strong>Morning Suggestion:</strong> <%= @drink_record.morning_suggestion.display_name %></p>
+<p><strong>Afternoon Suggestion:</strong> <%= @drink_record.afternoon_suggestion.display_name %></p>
+<p><strong>Evening Suggestion:</strong> <%= @drink_record.evening_suggestion.display_name %></p>
 <p><strong>Caffeine Total:</strong> <%= @drink_record.caffeine_total %>mg</p>

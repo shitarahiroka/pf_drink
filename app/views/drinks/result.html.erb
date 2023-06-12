@@ -5,9 +5,9 @@
 <p>カフェイン総摂取量: <%= @caffeine_total %> mg</p>
 
 <%= form_with(model: @drink_record, url: drink_records_path, method: :post) do |form| %>
-    <%= form.hidden_field :morning_suggestion, value: @morning_suggestion %>
-    <%= form.hidden_field :afternoon_suggestion, value: @afternoon_suggestion %>
-    <%= form.hidden_field :evening_suggestion, value: @evening_suggestion %>
+    <%= form.hidden_field :morning_suggestion, value: @morning_suggestion.map(&:id).join(',') %>
+    <%= form.hidden_field :afternoon_suggestion, value: @afternoon_suggestion.map(&:id).join(',') %>
+    <%= form.hidden_field :evening_suggestion, value: @evening_suggestion.map(&:id).join(',') %>
     <%= form.hidden_field :caffeine_total, value: @caffeine_total %>
     <%= form.hidden_field :date, value: Date.today %> <!-- 今日の日付を追加 -->
     <%= form.submit '登録' %>
