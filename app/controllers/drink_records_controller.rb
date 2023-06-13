@@ -1,10 +1,15 @@
 class DrinkRecordsController < ApplicationController
     def create
-        @drink_record = DrinkRecord.new(drink_record_params)
-        if @drink_record.save
-            redirect_to mypage_calendar_path, notice: '診断結果が保存されました。'
+        existing_record = DrinkRecord.find_by(user_id: current_user.id, date: params[:date])
+        if existing_record.present?
+            redirect_to mypage_calendar_path, flash: { notice: '既に記録が存在します。上書きせずにマイページに戻ります。' }
         else
-            redirect_to mypage_calendar_path, alert: '診断結果の保存に失敗しました。'
+            @drink_record = DrinkRecord.new(drink_record_params)
+            if @drink_record.save
+                redirect_to mypage_calendar_path, flash: { notice: '診断結果が保存されました。' }
+            else
+                redirect_to mypage_calendar_path, alert: '診断結果の保存に失敗しました。'
+            end
         end
     end
 

@@ -8,4 +8,5 @@ class DrinkRecord < ApplicationRecord
     validates :evening_suggestion, presence: true
     validates :caffeine_total, presence: true
     validates :date, presence: true
+    validates :user_id, uniqueness: { scope: :date, message: 'Record for this date already exists.' }
 end
