@@ -1,5 +1,7 @@
-<h1>マイページ</h1>
-<%= link_to "ドリンク提案フォームへ", new_drink_path %>
+<div class="text-center">
+    <h1>マイページ</h1>
+    <%= link_to "ドリンク提案フォームへ", new_drink_path, class: "btn btn-beige" %>
+</div>
 <%= month_calendar do |date| %>
     <%= date.day %>
     <% drink_record = @drink_records.find { |record| record.date == date } %>

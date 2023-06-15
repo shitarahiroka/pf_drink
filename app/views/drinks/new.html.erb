@@ -1,20 +1,24 @@
-<%= form_with(url: drinks_path, method: :post) do |form| %>
-    <%= form.fields_for :drink do |drink_form| %>
-      <div class="field">
-        <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？' %>
-        <%= drink_form.select :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], {}, class: 'form-control' %>
-      </div>
-  
-      <div class="field">
-        <%= drink_form.label :mood, '今日の気分は？' %>
-        <%= drink_form.select :mood, [['今日はガッツリ集中したい', '集中重視'], ['リラックスしながらゆったり集中したい', 'リラックスしながら'], ['疲れが残っているが頑張りたい', 'エネルギー補給']], {}, class: 'form-control' %>
-      </div>
-  
-      <div class="field">
-        <%= drink_form.label :calorie_preference, 'カロリーは気になる？' %>
-        <%= drink_form.check_box :calorie_preference, {}, true, false %>
-      </div>
-    <% end %>
-  
-    <%= form.submit '提案する', class: 'btn btn-primary' %>
-  <% end %>
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center" style="background-color: rgba(240, 181, 43, 0.5); padding: 20px;">
+        <%= form_with(url: drinks_path, method: :post) do |form| %>
+        <%= form.fields_for :drink do |drink_form| %>
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？' %>
+            <%= drink_form.select :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], {}, class: 'form-control' %>
+        </div>
+
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :mood, '今日の気分は？' %>
+            <%= drink_form.select :mood, [['今日はガッツリ集中したい', '集中重視'], ['リラックスしながらゆったり集中したい', 'リラックスしながら'], ['疲れが残っているが頑張りたい', 'エネルギー補給']], {}, class: 'form-control' %>
+        </div>
+
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :calorie_preference, 'カロリーは気になる？' %>
+            <%= drink_form.check_box :calorie_preference, {}, true, false %>
+        </div>
+        <% end %>
+
+        <%= form.submit '提案する', class: 'btn btn-beige' %>
+        <% end %>
+    </div>
+</div>

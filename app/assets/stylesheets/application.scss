@@ -15,3 +15,54 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "simple_calendar";
+
+.top-header {
+}
+
+.bg-overlay {
+    background-color: rgba(207, 153, 4, 0.5); /* オーバーレイの背景色 */
+}
+
+.card-title,
+.card-text {
+    color: white; /* テキストの色を白に設定 */
+}
+
+.btn-beige {
+    background-color: #be73026d;
+    border-color: #be73026d;
+}
+
+.bg-beige {
+    background-color: #be73026d;
+}
+
+.simple-calendar {
+    .day {
+    background: #fff9ee;
+    }
+    .wday-0 {
+    background: #ffeaea;
+    color: #ff505c;
+    }
+    .wday-1 {}
+    .wday-2 {}
+    .wday-3 {}
+    .wday-4 {}
+    .wday-5 {}
+    .wday-6 {
+    background: #d4ebff;
+    color: #5984dc;
+    }
+    .today {
+    background: #FFA0A0;
+    }
+    .past {}
+    .future {}
+    .start-date {}
+    .prev-month {}
+    .next-month {}
+    .current-month {}
+    .has-events {}
+}
