@@ -12,19 +12,19 @@
       <% if logged_in? %>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-          <%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' }, class: 'nav-link' %>
+          <%= link_to t('views.defaults.logout'), logout_path, method: :delete, data: { confirm: t('navbar.logout_confirm') }, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to 'プロフィール', profile_path(current_user.id), class: 'nav-link' %>
+            <%= link_to t('views.defaults.profile'), profile_path(current_user.id), class: 'nav-link' %>
           </li>
         </ul>
       <% else %>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <%= link_to 'ログイン', login_path, class: 'nav-link' %>
+            <%= link_to t('views.defaults.login'), login_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to '新規登録', new_user_path, class: 'nav-link' %>
+            <%= link_to t('views.defaults.register'), new_user_path, class: 'nav-link' %>
           </li>
         </ul>
       <% end %>

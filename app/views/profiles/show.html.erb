@@ -1,39 +1,39 @@
-<% content_for(:title, 'Profile') %>
+<% content_for(:title, t('profiles.show.title')) %>
 <div class="container pt-3">
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <h1 class="float-left mb-5">Profile</h1>
-            <%= link_to 'Edit', edit_profile_path, class: 'btn btn-success float-right' %>
-            <table class="table">
-                <tr>
-                    <th scope="row">Email</th>
-                    <td><%= current_user.email %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Name</th>
-                    <td><%= current_user.name %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Weight</th>
-                    <td><%= current_user.weight %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Age</th>
-                    <td><%= current_user.age %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Gender</th>
-                    <td><%= current_user.gender %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Area</th>
-                    <td><%= current_user.area %></td>
-                </tr>
-                <tr>
-                    <th scope="row">Caffeine Limit</th>
-                    <td><%= @caffeine_limit %></td>
-                </tr>
-            </table>
-        </div>
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h1 class="float-left mb-5"><%= t('views.profiles.show.title') %></h1>
+      <%= link_to t('views.profiles.show.edit'), edit_profile_path, class: 'btn btn-success float-right' %>
+      <table class="table">
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.email') %></th>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.name') %></th>
+          <td><%= current_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.weight') %></th>
+          <td><%= current_user.weight %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.age') %></th>
+          <td><%= current_user.age %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.gender') %></th>
+          <td><%= current_user.gender %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('activerecord.attributes.user.area') %></th>
+          <td><%= current_user.area %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t('views.profiles.show.caffeine_limit') %></th>
+          <td><%= @caffeine_limit %></td>
+        </tr>
+      </table>
     </div>
+  </div>
 </div>

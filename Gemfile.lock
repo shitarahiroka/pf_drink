@@ -239,6 +239,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.0.2)
   debug
+  i18n
   importmap-rails
   jbuilder
   jquery-rails
