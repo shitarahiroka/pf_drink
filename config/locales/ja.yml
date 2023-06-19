@@ -52,6 +52,10 @@ ja:
         edit: 編集
         caffeine_limit: 1日のカフェイン制限量
       new_drink_form_link: ドリンクの診断をする
+    password_resets:
+      new:
+        title: パスワードリセット申請画面
+        submit: 送信
 
   date:
     abbr_day_names:
