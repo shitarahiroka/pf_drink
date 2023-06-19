@@ -12,8 +12,13 @@ class DrinksController < ApplicationController
     study_time = params[:study_time]
     mood = params[:mood]
     calorie_preference = params[:calorie_preference]
-    # ユーザープロフィールのカフェイン制限値
-    caffeine_limit = calculate_caffeine_limit.to_f
+    if logged_in?
+      # ユーザープロフィールのカフェイン制限値
+      caffeine_limit = calculate_caffeine_limit.to_f
+    else
+      # ログインしていない場合の処理
+      caffeine_limit = nil
+    end
 
     # ドリンクデータベースからドリンク情報を取得
     drinks_data = Drink.all
@@ -51,25 +56,48 @@ class DrinksController < ApplicationController
       evening_drinks = evening_drinks.select { |drink| drink[:calories] <= 10 }
     end
 
-    # カフェイン総摂取量を計算する
-    caffeine_total = 0.0
-    morning_suggestion = morning_drinks.sample(1)
-    afternoon_suggestion = (afternoon_drinks - morning_suggestion).sample(1)
-    evening_suggestion = (evening_drinks - morning_suggestion - afternoon_suggestion).sample(1)
+    if logged_in?
+      # カフェイン総摂取量を計算する
+      caffeine_total = 0.0
+      morning_suggestion = morning_drinks.sample(1)
+      afternoon_suggestion = (afternoon_drinks - morning_suggestion).sample(1)
+      evening_suggestion = (evening_drinks - morning_suggestion - afternoon_suggestion).sample(1)
 
-    if morning_suggestion.first
-      caffeine_total += morning_suggestion.first[:caffeine].to_f
-      morning_suggestion = [] if caffeine_total > caffeine_limit
-    end
+      if morning_suggestion.first
+        caffeine_total += morning_suggestion.first[:caffeine].to_f
+        morning_suggestion = [] if caffeine_total > caffeine_limit
+      end
 
-    if afternoon_suggestion.first
-      caffeine_total += afternoon_suggestion.first[:caffeine].to_f
-      afternoon_suggestion = [] if caffeine_total > caffeine_limit
-    end
+      if afternoon_suggestion.first
+        caffeine_total += afternoon_suggestion.first[:caffeine].to_f
+        afternoon_suggestion = [] if caffeine_total > caffeine_limit
+      end
 
-    if evening_suggestion.first
-      caffeine_total += evening_suggestion.first[:caffeine].to_f
-      evening_suggestion = [] if caffeine_total > caffeine_limit
+      if evening_suggestion.first
+        caffeine_total += evening_suggestion.first[:caffeine].to_f
+        evening_suggestion = [] if caffeine_total > caffeine_limit
+      end
+    else
+      # ログインしていない場合の処理
+      caffeine_total = 0.0
+      morning_suggestion = morning_drinks.sample(1)
+      afternoon_suggestion = (afternoon_drinks - morning_suggestion).sample(1)
+      evening_suggestion = (evening_drinks - morning_suggestion - afternoon_suggestion).sample(1)
+
+      if morning_suggestion.first
+        caffeine_total += morning_suggestion.first[:caffeine].to_f
+        morning_suggestion = [] if caffeine_limit && caffeine_total > caffeine_limit
+      end
+
+      if afternoon_suggestion.first
+        caffeine_total += afternoon_suggestion.first[:caffeine].to_f
+        afternoon_suggestion = [] if caffeine_limit && caffeine_total > caffeine_limit
+      end
+
+      if evening_suggestion.first
+        caffeine_total += evening_suggestion.first[:caffeine].to_f
+        evening_suggestion = [] if caffeine_limit && caffeine_total > caffeine_limit
+      end
     end
 
     # インスタンス変数に結果を格納する

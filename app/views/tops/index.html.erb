@@ -8,12 +8,26 @@
     align-items: center;
     justify-content: center;
   }
+
+  .form-button {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .btn-beige {
+    color: white;
+  }
 </style>
 <div class="top-header">
   <div class="card bg-overlay text-white text-center">
     <div class="card-body">
       <h1 class="card-title">インテリ ドリンク</h1>
       <p class="card-text">学習や仕事に集中できるドリンクを提供します</p>
+    </div>
+    <div class="form-button">
+        <%= link_to t('views.profiles.new_drink_form_link'), new_drink_path, class: "btn btn-beige" %>
     </div>
   </div>
 </div>
