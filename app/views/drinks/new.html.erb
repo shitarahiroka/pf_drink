@@ -4,7 +4,7 @@
         <%= form.fields_for :drink do |drink_form| %>
         <div class="field" style="margin-bottom: 30px;">
             <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？' %>
-            <%= drink_form.select :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], {}, class: 'form-control' %>
+            <%= drink_form.collection_check_boxes :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], :last, :first, checked: ['morning'], class: 'form-control' %>
         </div>
 
         <div class="field" style="margin-bottom: 30px;">
