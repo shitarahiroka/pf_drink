@@ -1,13 +1,15 @@
 class DrinksController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create, :suggestion]
   def new
     @drink = Drink.new
   end
 
   def create
-    redirect_to suggestion_drinks_path(drink: drink_params)
+    redirect_to suggestion_drinks_path(drink: drink_params.merge(previous_drink: @previous_drink))
   end
 
   def suggestion
+    @previous_drink = params[:drink][:previous_drink]
     # フォーム入力値
     study_times = Array(params[:drink][:study_time]).reject(&:empty?)
     mood = params[:drink][:mood]

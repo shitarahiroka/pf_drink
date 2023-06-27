@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="text-center" style="background-color: rgba(240, 181, 43, 0.5); padding: 20px;">
-        <%= form_with(url: drinks_path, method: :post) do |form| %>
+        <%= form_with(url: drinks_path, method: :post, local: true) do |form| %>
         <%= form.fields_for :drink do |drink_form| %>
         <div class="field" style="margin-bottom: 30px;">
             <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？' %>
