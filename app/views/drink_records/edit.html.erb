@@ -6,7 +6,8 @@
         <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.display_name %></p>
         <p><strong><%= t('activerecord.attributes.drink_record.caffeine_total') %>:</strong> <%= @drink_record.caffeine_total %>mg</p>
 
-        <%= form_with(model: @drink_record, method: :patch) do |form| %>
+        <%= form_with(model: @drink_record, url: drink_record_path(@drink_record), method: :patch) do |form| %>
+            <%= form.hidden_field :date, value: @drink_record.date %>
 
             <!-- ドリンクの編集項目 -->
             <div class="form-group">

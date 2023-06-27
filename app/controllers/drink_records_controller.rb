@@ -40,16 +40,22 @@ class DrinkRecordsController < ApplicationController
     private
 
     def drink_record_params
-        morning_suggestion_id = params[:drink_record][:morning_suggestion]
-        afternoon_suggestion_id = params[:drink_record][:afternoon_suggestion]
-        evening_suggestion_id = params[:drink_record][:evening_suggestion]
+        if params[:drink_record].present?
+            morning_suggestion_id = params[:drink_record][:morning_suggestion]
+            afternoon_suggestion_id = params[:drink_record][:afternoon_suggestion]
+            evening_suggestion_id = params[:drink_record][:evening_suggestion]
+        else
+            morning_suggestion_id = params[:morning_suggestion]
+            afternoon_suggestion_id = params[:afternoon_suggestion]
+            evening_suggestion_id = params[:evening_suggestion]
+        end
 
         # ドリンクデータベースから対応するドリンクオブジェクトを取得
         morning_suggestion = Drink.find(morning_suggestion_id)
         afternoon_suggestion = Drink.find(afternoon_suggestion_id)
         evening_suggestion = Drink.find(evening_suggestion_id)
 
-        params.require(:drink_record).permit(:caffeine_total, :date).merge(
+        params.permit(:caffeine_total, :date).merge(
             user: current_user,
             morning_suggestion: morning_suggestion,
             afternoon_suggestion: afternoon_suggestion,

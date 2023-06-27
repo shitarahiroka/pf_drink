@@ -5,11 +5,10 @@ class DrinksController < ApplicationController
   end
 
   def create
-    redirect_to suggestion_drinks_path(drink: drink_params.merge(previous_drink: @previous_drink))
+    redirect_to suggestion_drinks_path(drink: drink_params)
   end
 
   def suggestion
-    @previous_drink = params[:drink][:previous_drink]
     # フォーム入力値
     study_times = Array(params[:drink][:study_time]).reject(&:empty?)
     mood = params[:drink][:mood]
