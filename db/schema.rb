@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_060923) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_075344) do
   create_table "drink_records", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "morning_suggestion"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_060923) do
     t.index ["afternoon_suggestion"], name: "fk_rails_a4c8c7bea6"
     t.index ["evening_suggestion"], name: "fk_rails_da7129ae13"
     t.index ["morning_suggestion"], name: "fk_rails_fb1a8b16ad"
+    t.index ["user_id", "date"], name: "index_drink_records_on_user_id_and_date", unique: true
     t.index ["user_id"], name: "index_drink_records_on_user_id"
   end
 
