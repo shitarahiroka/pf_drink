@@ -14,11 +14,11 @@ class DrinksController < ApplicationController
     mood = params[:drink][:mood]
     calorie_preference = params[:drink][:calorie_preference]
   
-    if logged_in?
+    if logged_in? && current_user.respond_to?(:calculate_caffeine_limit)
       # ユーザープロフィールのカフェイン制限値
       caffeine_limit = calculate_caffeine_limit.to_f
     else
-      # ログインしていない場合の処理
+      # カフェイン制限値未設定またはログインしていない場合の処理
       caffeine_limit_unlogged = 400
       caffeine_limit = caffeine_limit_unlogged
     end

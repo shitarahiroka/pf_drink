@@ -4,7 +4,7 @@
 </div>
 <%= month_calendar do |date| %>
     <%= date.day %>
-    <% drink_record = @drink_records.find { |record| record.date == date } %>
+    <% drink_record = @drink_records.find { |record| record.date == date && record.user_id == current_user.id } %>
     <% if drink_record %>
         <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
     <% end %>

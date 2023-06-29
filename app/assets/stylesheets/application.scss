@@ -50,6 +50,12 @@
     background-color: #a6de23b2;
 }
 
+.required::after {
+    content: "必須";
+    color: #dc3545;
+    margin-left: 5px;
+}
+
 .simple-calendar {
     .day {
     background: #fff9ee;

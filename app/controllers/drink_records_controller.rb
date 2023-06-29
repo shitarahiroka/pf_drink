@@ -2,13 +2,13 @@ class DrinkRecordsController < ApplicationController
     def create
         existing_record = DrinkRecord.find_by(user_id: current_user.id, date: params[:date])
         if existing_record.present?
-            redirect_to mypage_calendar_path, flash: { notice: '既に記録が存在します。上書きせずにマイページに戻ります。' }
+            redirect_to mypage_calendar_path, danger: t('.fail')
         else
             @drink_record = DrinkRecord.new(drink_record_params)
             if @drink_record.save
-                redirect_to mypage_calendar_path, flash: { notice: '診断結果が保存されました。' }
+                redirect_to mypage_calendar_path, success: t('.success')
             else
-                redirect_to mypage_calendar_path, alert: '診断結果の保存に失敗しました。'
+                redirect_to mypage_calendar_path
             end
         end
     end
@@ -25,7 +25,7 @@ class DrinkRecordsController < ApplicationController
         @drink_record = DrinkRecord.find(params[:id])
         if @drink_record.update(drink_record_params)
             update_caffeine_total
-            redirect_to drink_record_path(@drink_record), flash: { notice: 'ドリンク記録が更新されました。' }
+            redirect_to drink_record_path(@drink_record), success: t('.success')
         else
             render :edit
         end
@@ -34,7 +34,7 @@ class DrinkRecordsController < ApplicationController
     def destroy
         @drink_record = DrinkRecord.find(params[:id])
         @drink_record.destroy
-        redirect_to mypage_calendar_path, flash: { notice: 'ドリンク記録が削除されました。' }
+        redirect_to mypage_calendar_path, success: t('.success')
     end
 
     private
