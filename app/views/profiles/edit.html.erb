@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <h1><%= t('views.profiles.edit.title') %></h1>
+      <h1><%= t('.title') %></h1>
       <%= form_with model: @user, url: profile_path, local: true do |f| %>
         <%= render "shared/error_messages", object: f.object %>
         <div class="form-group">
@@ -31,7 +31,7 @@
           <%= f.label :area, t('activerecord.attributes.user.area') %>
           <%= f.select :area, User.areas.keys, { include_blank: true }, class: "form-control mb-3" %>
         </div>
-        <%= f.submit t('views.profiles.edit.save'), class: "btn btn-blue" %>
+        <%= f.submit t('.save'), class: "btn btn-blue" %>
         <%= link_to '戻る', mypage_calendar_path, class: 'btn btn-secondary' %>
       <% end %>
     </div>
