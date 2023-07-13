@@ -60,4 +60,15 @@ class User < ApplicationRecord
     kagoshima: 46,
     okinawa: 47
   }
+  def calculate_caffeine_limit
+    if weight.nil? || age.nil?
+      '未設定'
+    elsif age.between?(13, 18)
+      '100mg'
+    else
+      weight_in_kg = weight.to_f
+      caffeine_limit = (6 * weight_in_kg).round(2)
+      "#{caffeine_limit}mg"
+    end
+  end
 end

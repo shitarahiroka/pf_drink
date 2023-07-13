@@ -1,11 +1,10 @@
 class ProfilesController < ApplicationController
+    before_action :set_user
     def show
-        @user = User.find(current_user.id)
-        @caffeine_limit = calculate_caffeine_limit(@user)
+        @caffeine_limit = @user.calculate_caffeine_limit
     end
 
     def edit
-        @user = User.find(current_user.id)
     end
 
     def update
@@ -28,15 +27,4 @@ class ProfilesController < ApplicationController
         params.require(:user).permit(:email, :name, :weight, :age, :gender, :area)
     end
 
-    def calculate_caffeine_limit(user)
-        if user.weight.nil? || user.age.nil?
-            '未設定'
-        elsif user.age.between?(13, 18)
-            '100mg'
-        else
-            weight_in_kg = user.weight.to_f
-            caffeine_limit = (6 * weight_in_kg).round(2)
-            "#{caffeine_limit}mg"
-        end
-    end
 end
