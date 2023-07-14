@@ -16,9 +16,16 @@ drinks_data = [
   { name: "オロナミンC", calories: 80.0, caffeine: 19.0, teanine: 0, mood: "エネルギー補給" },
   { name: "ミルクココア", calories: 60.0, caffeine: 3.0, teanine: 0, mood: "リラックスしながら" },
   { name: "レッドブル", calories: 115.0, caffeine: 80.0, teanine: 0, mood: "エネルギー補給" },
-  { name: "モンスターエナジー", calories: 177.5, caffeine: 160.0, teanine: 0, mood: "集中重視" }
+  { name: "モンスターエナジー", calories: 177.5, caffeine: 160.0, teanine: 0, mood: "集中重視" },
+  { name: "レッドブルシュガーフリー", calories: 0.0, caffeine: 80.0, teanine: 0, mood: "エネルギー補給" },
+  { name: "烏龍茶", calories: 0.0, caffeine: 30.0, teanine: 1, mood: "リラックスしながら" },
+  { name: "ジャスミン茶", calories: 0.0, caffeine: 30.0, teanine: 1, mood: "リラックスしながら" },
+  { name: "玄米茶", calories: 0.0, caffeine: 15.0, teanine: 1, mood: "リラックスしながら" },
+  { name: "カフェオレ", calories: 60.0, caffeine: 60.0, teanine: 0, mood: "集中重視" },
+  { name: "抹茶ラテ", calories: 156.0, caffeine: 80.0, teanine: 1, mood: "エネルギー補給" },
+  { name: "ほうじ茶ラテ", calories: 118.0, caffeine: 14.0, teanine: 1, mood: "エネルギー補給" }
 ]
 # ドリンクデータの作成
 drinks_data.each do |data|
-  Drink.create(data)
+  Drink.find_or_create_by(data)
 end
