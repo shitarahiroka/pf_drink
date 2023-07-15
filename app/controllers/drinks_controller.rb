@@ -27,152 +27,122 @@ class DrinksController < ApplicationController
     morning_suggestion = nil
     afternoon_suggestion = nil
     evening_suggestion = nil
-  
+
     # ドリンクの提案
     if mood == '集中重視'
       if study_time.include?('morning')
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        # 選択された朝のドリンク候補を取得
+        morning_candidates = Drink.where(mood: '集中重視')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: 'エネルギー補給').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: 'エネルギー補給').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        # 選択された朝のドリンク候補を取得
+        morning_candidates = Drink.where(mood: 'エネルギー補給')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      # すでに選ばれたドリンクと重複しないように選択
+      morning_candidates = morning_candidates.where.not(id: [afternoon_suggestion, evening_suggestion].compact.map(&:id)) if afternoon_suggestion || evening_suggestion
+      morning_suggestion = morning_candidates.sample
+
+      caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
 
       if study_time.include?('afternoon')
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: '集中重視')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: 'エネルギー補給').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: 'エネルギー補給').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: 'エネルギー補給')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      afternoon_candidates = afternoon_candidates.where.not(id: [morning_suggestion, evening_suggestion].compact.map(&:id)) if morning_suggestion || evening_suggestion
+      afternoon_suggestion = afternoon_candidates.sample
+
+      caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
 
       if study_time.include?('evening')
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['集中重視', 'エネルギー補給'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['リラックスしながら'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      evening_candidates = evening_candidates.where.not(id: [morning_suggestion, afternoon_suggestion].compact.map(&:id)) if morning_suggestion || afternoon_suggestion
+      evening_suggestion = evening_candidates.sample
+
+      caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+
     elsif mood == 'リラックスしながら'
       if study_time.include?('morning')
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        morning_candidates = Drink.where(mood: '集中重視')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: 'リラックスしながら').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: 'リラックスしながら').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        morning_candidates = Drink.where(mood: 'リラックスしながら')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      morning_candidates = morning_candidates.where.not(id: [afternoon_suggestion, evening_suggestion].compact.map(&:id)) if afternoon_suggestion || evening_suggestion
+      morning_suggestion = morning_candidates.sample
+
+      caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
 
       if study_time.include?('afternoon')
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: '集中重視')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: 'リラックスしながら').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: 'リラックスしながら').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: 'リラックスしながら')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      afternoon_candidates = afternoon_candidates.where.not(id: [morning_suggestion, evening_suggestion].compact.map(&:id)) if morning_suggestion || evening_suggestion
+      afternoon_suggestion = afternoon_candidates.sample
+
+      caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
 
       if study_time.include?('evening')
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['集中重視', 'エネルギー補給'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['リラックスしながら'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      evening_candidates = evening_candidates.where.not(id: [morning_suggestion, afternoon_suggestion].compact.map(&:id)) if morning_suggestion || afternoon_suggestion
+      evening_suggestion = evening_candidates.sample
+
+      caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+
     elsif mood == 'エネルギー補給'
       if study_time.include?('morning')
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: 'エネルギー補給').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: 'エネルギー補給').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        morning_candidates = Drink.where(mood: 'エネルギー補給')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          morning_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          morning_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
+        morning_candidates = Drink.where(mood: '集中重視')
+        morning_candidates = morning_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      morning_candidates = morning_candidates.where.not(id: [afternoon_suggestion, evening_suggestion].compact.map(&:id)) if afternoon_suggestion || evening_suggestion
+      morning_suggestion = morning_candidates.sample
+
+      caffeine_limit -= morning_suggestion.caffeine if morning_suggestion
 
       if study_time.include?('afternoon')
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: 'エネルギー補給').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: 'エネルギー補給').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: 'エネルギー補給')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          afternoon_suggestion = Drink.where(mood: '集中重視').where('calories >= 0 AND calories <= 100').sample
-        else
-          afternoon_suggestion = Drink.where(mood: '集中重視').sample
-        end
-        caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
+        afternoon_candidates = Drink.where(mood: '集中重視')
+        afternoon_candidates = afternoon_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      afternoon_candidates = afternoon_candidates.where.not(id: [morning_suggestion, evening_suggestion].compact.map(&:id)) if morning_suggestion || evening_suggestion
+      afternoon_suggestion = afternoon_candidates.sample
+
+      caffeine_limit -= afternoon_suggestion.caffeine if afternoon_suggestion
 
       if study_time.include?('evening')
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: ['集中重視', 'エネルギー補給']).sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['集中重視', 'エネルギー補給'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       else
-        if calorie_preference
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').where('calories >= 0 AND calories <= 100').sample
-        else
-          evening_suggestion = Drink.where(mood: 'リラックスしながら').sample
-        end
-        caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+        evening_candidates = Drink.where(mood: ['リラックスしながら'])
+        evening_candidates = evening_candidates.where('calories >= 0 AND calories <= 100') if calorie_preference
       end
+      evening_candidates = evening_candidates.where.not(id: [morning_suggestion, afternoon_suggestion].compact.map(&:id)) if morning_suggestion || afternoon_suggestion
+      evening_suggestion = evening_candidates.sample
+
+      caffeine_limit -= evening_suggestion.caffeine if evening_suggestion
+
     end
 
     # カフェインの総摂取量を計算
