@@ -7,6 +7,12 @@
     <%= date.day %>
     <% drink_record = @drink_records.find { |record| record.date == date && record.user_id == current_user.id } %>
     <% if drink_record %>
-        <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
+    <% puts "drink_record.caffeine_total: #{drink_record.caffeine_total}" %>
+    <% puts "@caffeine_limit: #{@caffeine_limit}" %>
+    <% if drink_record.caffeine_total.to_i > @caffeine_limit.to_i %>
+      <span class="attention-icon" title="カフェイン制限量を超えています">⚠️</span>
     <% end %>
+    <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
+  <% end %>
+  
 <% end %>

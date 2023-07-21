@@ -5,6 +5,12 @@
         <p><strong><%= t('activerecord.attributes.drink_record.afternoon_suggestion') %>:</strong> <%= @drink_record.afternoon_suggestion.display_name %></p>
         <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.display_name %></p>
         <p><strong><%= t('activerecord.attributes.drink_record.caffeine_total') %>:</strong> <%= @drink_record.caffeine_total %>mg</p>
+        <% if @drink_record.caffeine_total > current_user.calculate_caffeine_limit.to_i %>
+            <div class="attention-icon">
+                <!-- 注意マークを表示 -->
+                <p>カフェイン制限量を超えています⚠️</p>
+            </div>
+        <% end %>
         <%= link_to '編集', edit_drink_record_path(@drink_record), class: 'btn btn-lime float-right' %>
         <%= link_to '削除', drink_record_path(@drink_record), data: { turbo_method: :delete, turbo_confirm: '本当に消していいですか？' }, class: 'btn btn-pink' %>
         <%= link_to '戻る', mypage_calendar_path, class: 'btn btn-secondary' %>

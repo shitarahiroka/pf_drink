@@ -23,9 +23,26 @@ class DrinkRecordsController < ApplicationController
 
     def update
         @drink_record = DrinkRecord.find(params[:id])
+        caffeine_limit = current_user.calculate_caffeine_limit.to_f
+
+        # ドリンクの更新を試みる
         if @drink_record.update(drink_record_params)
-            update_caffeine_total
-            redirect_to drink_record_path(@drink_record), success: t('.success')
+            # 各摂取量を取得してカフェイン総摂取量を計算
+            morning_suggestion = @drink_record.morning_suggestion.caffeine.to_f
+            afternoon_suggestion = @drink_record.afternoon_suggestion.caffeine.to_f
+            evening_suggestion = @drink_record.evening_suggestion.caffeine.to_f
+            caffeine_total = morning_suggestion + afternoon_suggestion + evening_suggestion
+
+            # カフェイン総摂取量を更新
+            @drink_record.update(caffeine_total: caffeine_total)
+
+            if caffeine_total > caffeine_limit
+                # カフェイン制限を超える場合は更新をキャンセルし、エラーメッセージを表示
+                flash.now[:warning] = t('.fail')
+                render :edit, status: :unprocessable_entity
+            else
+                redirect_to drink_record_path(@drink_record), success: t('.success')
+            end
         else
             render :edit
         end
@@ -61,17 +78,5 @@ class DrinkRecordsController < ApplicationController
             afternoon_suggestion: afternoon_suggestion,
             evening_suggestion: evening_suggestion
         )
-    end
-
-    def update_caffeine_total
-        morning_suggestion = @drink_record.morning_suggestion.caffeine.to_i
-        afternoon_suggestion = @drink_record.afternoon_suggestion.caffeine.to_i
-        evening_suggestion = @drink_record.evening_suggestion.caffeine.to_i
-
-        # 各摂取量を合計してカフェイン総摂取量を計算
-        caffeine_total = morning_suggestion + afternoon_suggestion + evening_suggestion
-
-        # カフェイン総摂取量を更新
-        @drink_record.update(caffeine_total: caffeine_total)
     end
 end

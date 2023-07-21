@@ -84,3 +84,16 @@
     .current-month {}
     .has-events {}
 }
+
+.attention-icon {
+    color: red; /* アイコンの色を赤に設定 */
+    font-size: 20px; /* アイコンのサイズを調整 */
+    margin-right: 5px; /* マージンを調整 */
+    animation: pulse 1.5s infinite; /* アニメーションを追加 */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
