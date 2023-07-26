@@ -16,7 +16,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "simple_calendar";
-
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
 .top-header {
 }
 
@@ -97,3 +97,112 @@
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+
+.bottom_space {
+    margin-top: 15px;
+    margin-bottom: 5em;
+}
+
+.form-button {
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fuwafuwa {
+    animation: fuwafuwa 3s infinite ease-in-out .8s alternate;
+    background: url(tea.png) no-repeat center center / 60px auto;
+    display: inline-block;
+    transition: 1.5s ease-in-out;
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+  }
+
+@keyframes fuwafuwa {
+    0% {
+      transform:translate(0, 0) rotate(-7deg);
+    }
+    50% {
+      transform:translate(0, -7px) rotate(0deg);
+    }
+    100% {
+      transform:translate(0, 0) rotate(7deg);
+    }
+}
+
+.mypage-calendar-container {
+    /* 背景画像のURLを指定します。'url(画像のURL)'の部分に実際の画像のURLを入力してください。 */
+    background-image: url('mypage.png');
+    /* 背景画像のサイズを調整します。必要に応じて変更してください。 */
+    background-size: cover;
+    /* 背景画像の繰り返しを指定します。'no-repeat'は繰り返しなしを意味します。 */
+    background-repeat: repeat;
+    /* 背景画像の表示位置を指定します。'center'は中央に表示することを意味します。 */
+    background-position: center top;
+    /* ビューポートの高さに合わせる */
+    height: 50vh;
+    animation: moveBackground 60s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position-y: 0;
+      }
+      100% {
+        /* 背景画像の高さに応じて適切な負の値を指定します */
+        background-position-y: -2000px; /* 画像の高さに合わせて調整してください */
+      }
+  }
+
+* {
+    font-family: 'Kosugi Maru', sans-serif;
+}
+
+.balloon5 {
+    width: 100%;
+    margin: 1.5em 0;
+    overflow: hidden;
+  }
+  
+  .balloon5 .faceicon {
+    float: left;
+    margin-right: -90px;
+    width: 80px;
+  }
+  
+  .balloon5 .faceicon img{
+    width: 100%;
+    height: auto;
+    border: solid 3px #d7ebfe;
+    border-radius: 50%;
+  }
+  
+  .balloon5 .chatting {
+    width: 100%;
+  }
+  
+  .says {
+    display: inline-block;
+    position: relative; 
+    margin: 5px 0 0 105px;
+    padding: 17px 13px;
+    border-radius: 12px;
+    background: #d7ebfe;
+  }
+  
+  .says:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 18px; 
+    left: -24px;
+    border: 12px solid transparent;
+    border-right: 12px solid #d7ebfe;
+  }
+  
+  .says p {
+    margin: 0;
+    padding: 0;
+  }

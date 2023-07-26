@@ -3,6 +3,19 @@
   <div class="row">
     <div class="col-md-10 offset-md-1">
       <h1><%= t('.title') %></h1>
+      <!--吹き出しはじまり-->
+      <div class="balloon5">
+        <div class="faceicon">
+          <img src="/assets/icon.png" alt="アイコン">
+        </div>
+        <div class="chatting">
+          <div class="says">
+            <p>体重と年齢を設定すると自分に合ったカフェイン制限量がわかります。</p>
+            <p>体重と年齢を設定しないとカフェイン制限量は400mgです。</p>
+          </div>
+        </div>
+      </div>
+      <!--吹き出し終わり-->
       <%= form_with model: @user, url: profile_path, local: true do |f| %>
         <%= render "shared/error_messages", object: f.object %>
         <div class="form-group">

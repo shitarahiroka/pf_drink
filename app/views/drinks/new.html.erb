@@ -19,6 +19,11 @@
         <% end %>
 
         <%= form.submit  t('.submit'), class: 'btn btn-beige' %>
+        <% if logged_in? %>
+            <%= link_to '戻る', mypage_calendar_path, class: 'btn btn-secondary' %>
+        <% else %>
+            <%= link_to '戻る', '/', class: 'btn btn-secondary' %>
+        <% end %>
         <% end %>
     </div>
 </div>

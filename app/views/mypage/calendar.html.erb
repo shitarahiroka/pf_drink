@@ -1,7 +1,13 @@
-<div class="text-center">
-    <h1><%= t('defaults.mypage') %></h1>
-    <p>あなたの1日のカフェイン制限量は <%= @caffeine_limit %> です。</p>
+<div class="mypage-calendar-container">
+    <br></br>
+    <div class="card bg-overlay text-white text-center">
+    <div class="card-body">
+        <h3  class="card-title">あなたの1日のカフェイン制限量は <%= @caffeine_limit %> です。</h3>
+    </div>
+    </div>
+    <div class="form-button">
     <%= link_to t('tops.index.new_drink_form_link'), new_drink_path, class: "btn btn-beige" %>
+</div>
 </div>
 <%= month_calendar do |date| %>
     <%= date.day %>
@@ -14,5 +20,5 @@
     <% end %>
     <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
   <% end %>
-  
+
 <% end %>

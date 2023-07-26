@@ -10,65 +10,66 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
-  enum gender: { male: 0, female: 1, other: 2 }
+  enum gender: { 男性: 0, 女性: 1 }
   enum area: {
-    hokkaido: 1,
-    aomori: 2,
-    iwate: 3,
-    miyagi: 4,
-    akita: 5,
-    yamagata: 6,
-    fukushima: 7,
-    ibaraki: 8,
-    tochigi: 9,
-    gunma: 10,
-    saitama: 11,
-    chiba: 12,
-    tokyo: 13,
-    kanagawa: 14,
-    niigata: 15,
-    toyama: 16,
-    ishikawa: 17,
-    fukui: 18,
-    yamanashi: 19,
-    nagano: 20,
-    gifu: 21,
-    shizuoka: 22,
-    aichi: 23,
-    mie: 24,
-    shiga: 25,
-    kyoto: 26,
-    osaka: 27,
-    hyogo: 28,
-    nara: 29,
-    wakayama: 30,
-    tottori: 31,
-    shimane: 32,
-    okayama: 33,
-    hiroshima: 34,
-    yamaguchi: 35,
-    tokushima: 36,
-    kagawa: 37,
-    ehime: 38,
-    kochi: 39,
-    fukuoka: 40,
-    saga: 41,
-    nagasaki: 42,
-    kumamoto: 43,
-    oita: 44,
-    miyazaki: 45,
-    kagoshima: 46,
-    okinawa: 47
-  }
+北海道: 1,
+青森: 2,
+岩手: 3,
+宮城: 4,
+秋田: 5,
+山形: 6,
+福島: 7,
+茨城: 8,
+栃木: 9,
+群馬: 10,
+埼玉: 11,
+千葉: 12,
+東京: 13,
+神奈川: 14,
+新潟: 15,
+富山: 16,
+石川: 17,
+福井: 18,
+山梨: 19,
+長野: 20,
+岐阜: 21,
+静岡: 22,
+愛知: 23,
+三重: 24,
+滋賀: 25,
+京都: 26,
+大阪: 27,
+兵庫: 28,
+奈良: 29,
+和歌山: 30,
+鳥取: 31,
+島根: 32,
+岡山: 33,
+広島: 34,
+山口: 35,
+徳島: 36,
+香川: 37,
+愛媛: 38,
+高知: 39,
+福岡: 40,
+佐賀: 41,
+長崎: 42,
+熊本: 43,
+大分: 44,
+宮崎: 45,
+鹿児島: 46,
+沖縄: 47
+}
   def calculate_caffeine_limit
     if weight.nil? || age.nil?
-      '未設定'
+      caffeine_limit = 400
     elsif age.between?(13, 18)
-      '100mg'
+      caffeine_limit = 100
     else
       weight_in_kg = weight.to_f
       caffeine_limit = (6 * weight_in_kg).round(2)
-      "#{caffeine_limit}mg"
     end
+
+    "#{caffeine_limit}mg"
   end
 end
