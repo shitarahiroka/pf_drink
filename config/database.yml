@@ -49,7 +49,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: pf_drink_production
   username: pf_drink
   password: <%= ENV["PF_DRINK_DATABASE_PASSWORD"] %>

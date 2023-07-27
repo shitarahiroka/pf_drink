@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "sprockets-rails"
 
 # Use mysql as the database for Active Record
-gem "mysql2", "~> 0.5"
+
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -67,5 +67,12 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "mysql2", "~> 0.5"
 end
 
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+group :production do
+  gem "pg", "~> 1.5"
+end
