@@ -27,6 +27,7 @@ class DrinksController < ApplicationController
     morning_suggestion = nil
     afternoon_suggestion = nil
     evening_suggestion = nil
+    caffeine_total = 0
 
     # ドリンクの提案
     if mood == '集中重視'

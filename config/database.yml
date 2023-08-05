@@ -52,6 +52,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: pf_drink_production
-  username: pf_drink
+  database: intell_drink
+  username: shitarahiroka
   password: <%= ENV["PF_DRINK_DATABASE_PASSWORD"] %>
