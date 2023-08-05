@@ -1,36 +1,52 @@
-<% content_for(:title, 'Edit Profile') %>
+<% content_for(:title, t('views.profiles.edit.title')) %>
 <div class="container">
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <h1>Edit Profile</h1>
-            <%= form_with model: @user, url: profile_path, local: true do |f| %>
-                <%= render "shared/error_messages", object: f.object %>
-                    <div class="form-group">
-                        <%= f.label :email %>
-                        <%= f.email_field :email, class: "form-control mb-3" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :name %>
-                        <%= f.text_field :name, class: "form-control mb-3" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :weight %>
-                        <%= f.select :weight, (30..150), { include_blank: true }, class: "form-control mb-3" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :age %>
-                        <%= f.select :age, (13..100), { include_blank: true }, class: "form-control mb-3" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :gender %>
-                        <%= f.select :gender, User.genders.keys, { include_blank: true }, class: "form-control mb-3" %>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :area %>
-                        <%= f.select :area, User.areas.keys, { include_blank: true }, class: "form-control mb-3" %>
-                    </div>
-                    <%= f.submit 'Save Changes', class: "btn btn-primary" %>
-            <% end %>
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h1><%= t('.title') %></h1>
+      <!--吹き出しはじまり-->
+      <div class="balloon5">
+        <div class="faceicon">
+          <img src="/assets/icon.png" alt="アイコン">
         </div>
+        <div class="chatting">
+          <div class="says">
+            <p>体重と年齢を設定すると自分に合ったカフェイン制限量がわかります。</p>
+            <p>体重と年齢を設定しないとカフェイン制限量は400mgです。</p>
+          </div>
+        </div>
+      </div>
+      <!--吹き出し終わり-->
+      <%= form_with model: @user, url: profile_path, local: true do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+        <div class="form-group">
+          <%= f.label :email, t('activerecord.attributes.user.email') %>
+          <span class="badge rounded-pill bg-danger">必須</span>
+          <%= f.email_field :email, class: "form-control mb-3" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name, t('activerecord.attributes.user.name') %>
+          <span class="badge rounded-pill bg-danger">必須</span>
+          <%= f.text_field :name, class: "form-control mb-3" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :weight, t('activerecord.attributes.user.weight') %>
+          <%= f.select :weight, (30..150), { include_blank: true }, class: "form-control mb-3" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :age, t('activerecord.attributes.user.age') %>
+          <%= f.select :age, (13..100), { include_blank: true }, class: "form-control mb-3" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :gender, t('activerecord.attributes.user.gender') %>
+          <%= f.select :gender, User.genders.keys, { include_blank: true }, class: "form-control mb-3" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :area, t('activerecord.attributes.user.area') %>
+          <%= f.select :area, User.areas.keys, { include_blank: true }, class: "form-control mb-3" %>
+        </div>
+        <%= f.submit t('.save'), class: "btn btn-blue" %>
+        <%= link_to '戻る', mypage_calendar_path, class: 'btn btn-secondary' %>
+      <% end %>
     </div>
+  </div>
 </div>

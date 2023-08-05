@@ -1,5 +1,24 @@
-<h1>マイページ</h1>
-
+<div class="mypage-calendar-container">
+    <br></br>
+    <div class="card bg-overlay text-white text-center">
+    <div class="card-body">
+        <h3  class="card-title">あなたの1日のカフェイン制限量は <%= @caffeine_limit %> です。</h3>
+    </div>
+    </div>
+    <div class="form-button">
+    <%= link_to t('tops.index.new_drink_form_link'), new_drink_path, class: "btn btn-beige" %>
+</div>
+</div>
 <%= month_calendar do |date| %>
     <%= date.day %>
+    <% drink_record = @drink_records.find { |record| record.date == date && record.user_id == current_user.id } %>
+    <% if drink_record %>
+    <% puts "drink_record.caffeine_total: #{drink_record.caffeine_total}" %>
+    <% puts "@caffeine_limit: #{@caffeine_limit}" %>
+    <% if drink_record.caffeine_total.to_i > @caffeine_limit.to_i %>
+      <span class="attention-icon" title="カフェイン制限量を超えています">⚠️</span>
+    <% end %>
+    <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
+  <% end %>
+
 <% end %>

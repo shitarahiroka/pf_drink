@@ -1,0 +1,208 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require simple_calendar
+ */
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+@import "simple_calendar";
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+.top-header {
+}
+
+.bg-overlay {
+    background-color: rgba(207, 153, 4, 0.5); /* オーバーレイの背景色 */
+}
+
+.card-title,
+.card-text {
+    color: white; /* テキストの色を白に設定 */
+}
+
+.btn-beige {
+    background-color: #be73026d;
+    border-color: #be73026d;
+}
+
+.bg-beige {
+    background-color: #be73026d;
+}
+
+.btn-blue {
+    background-color: #3e8ecb9e;
+}
+
+.btn-pink {
+    background-color: #cb3e6f85;
+}
+
+.btn-lime {
+    background-color: #a6de23b2;
+}
+
+.required::after {
+    content: "必須";
+    color: #dc3545;
+    margin-left: 5px;
+}
+
+.simple-calendar {
+    .day {
+    background: #fff9ee;
+    }
+    .wday-0 {
+    background: #ffeaea;
+    color: #ff505c;
+    }
+    .wday-1 {}
+    .wday-2 {}
+    .wday-3 {}
+    .wday-4 {}
+    .wday-5 {}
+    .wday-6 {
+    background: #d4ebff;
+    color: #5984dc;
+    }
+    .today {
+    background: #FFA0A0;
+    }
+    .past {}
+    .future {}
+    .start-date {}
+    .prev-month {}
+    .next-month {}
+    .current-month {}
+    .has-events {}
+}
+
+.attention-icon {
+    color: red; /* アイコンの色を赤に設定 */
+    font-size: 20px; /* アイコンのサイズを調整 */
+    margin-right: 5px; /* マージンを調整 */
+    animation: pulse 1.5s infinite; /* アニメーションを追加 */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.bottom_space {
+    margin-top: 15px;
+    margin-bottom: 5em;
+}
+
+.form-button {
+    position: absolute;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.fuwafuwa {
+    animation: fuwafuwa 3s infinite ease-in-out .8s alternate;
+    background: url(tea.png) no-repeat center center / 60px auto;
+    display: inline-block;
+    transition: 1.5s ease-in-out;
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+  }
+
+@keyframes fuwafuwa {
+    0% {
+      transform:translate(0, 0) rotate(-7deg);
+    }
+    50% {
+      transform:translate(0, -7px) rotate(0deg);
+    }
+    100% {
+      transform:translate(0, 0) rotate(7deg);
+    }
+}
+
+.mypage-calendar-container {
+    /* 背景画像のURLを指定します。'url(画像のURL)'の部分に実際の画像のURLを入力してください。 */
+    background-image: url('mypage.png');
+    /* 背景画像のサイズを調整します。必要に応じて変更してください。 */
+    background-size: cover;
+    /* 背景画像の繰り返しを指定します。'no-repeat'は繰り返しなしを意味します。 */
+    background-repeat: repeat;
+    /* 背景画像の表示位置を指定します。'center'は中央に表示することを意味します。 */
+    background-position: center top;
+    /* ビューポートの高さに合わせる */
+    height: 50vh;
+    animation: moveBackground 60s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position-y: 0;
+      }
+      100% {
+        /* 背景画像の高さに応じて適切な負の値を指定します */
+        background-position-y: -2000px; /* 画像の高さに合わせて調整してください */
+      }
+  }
+
+* {
+    font-family: 'Kosugi Maru', sans-serif;
+}
+
+.balloon5 {
+    width: 100%;
+    margin: 1.5em 0;
+    overflow: hidden;
+  }
+  
+  .balloon5 .faceicon {
+    float: left;
+    margin-right: -90px;
+    width: 80px;
+  }
+  
+  .balloon5 .faceicon img{
+    width: 100%;
+    height: auto;
+    border: solid 3px #d7ebfe;
+    border-radius: 50%;
+  }
+  
+  .balloon5 .chatting {
+    width: 100%;
+  }
+  
+  .says {
+    display: inline-block;
+    position: relative; 
+    margin: 5px 0 0 105px;
+    padding: 17px 13px;
+    border-radius: 12px;
+    background: #d7ebfe;
+  }
+  
+  .says:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 18px; 
+    left: -24px;
+    border: 12px solid transparent;
+    border-right: 12px solid #d7ebfe;
+  }
+  
+  .says p {
+    margin: 0;
+    padding: 0;
+  }

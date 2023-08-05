@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center" style="background-color: rgba(240, 181, 43, 0.5); padding: 20px;">
+        <%= form_with(url: drinks_path, method: :post, local: true) do |form| %>
+        <%= form.fields_for :drink do |drink_form| %>
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :study_time, '今日の集中したい学習時間帯は？', class: 'form-label' %>
+            <%= drink_form.collection_check_boxes :study_time, [['朝', 'morning'], ['昼', 'afternoon'], ['夜', 'evening']], :last, :first, checked: ['morning'], class: 'form-control' %>
+        </div>
+
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :mood, '今日の気分は？' %>
+            <%= drink_form.select :mood, [['今日はガッツリ集中したい', '集中重視'], ['リラックスしながらゆったり集中したい', 'リラックスしながら'], ['疲れが残っているが頑張りたい', 'エネルギー補給']], {}, class: 'form-control' %>
+        </div>
+
+        <div class="field" style="margin-bottom: 30px;">
+            <%= drink_form.label :calorie_preference, 'カロリーは気になる？' %>
+            <%= drink_form.check_box :calorie_preference, {}, true, false %>
+        </div>
+        <% end %>
+
+        <%= form.submit  t('.submit'), class: 'btn btn-beige' %>
+        <% if logged_in? %>
+            <%= link_to '戻る', mypage_calendar_path, class: 'btn btn-secondary' %>
+        <% else %>
+            <%= link_to '戻る', '/', class: 'btn btn-secondary' %>
+        <% end %>
+        <% end %>
+    </div>
+</div>
