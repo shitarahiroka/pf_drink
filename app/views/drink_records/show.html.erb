@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="text-center" style="background-color: rgba(240, 181, 43, 0.5); padding: 20px;">
     <h1><%= l(@drink_record.date, format: :short) %>のドリンク</h1>
-        <p><strong><%= t('activerecord.attributes.drink_record.morning_suggestion') %>:</strong> <%= @drink_record.morning_suggestion.display_name %></p>
-        <p><strong><%= t('activerecord.attributes.drink_record.afternoon_suggestion') %>:</strong> <%= @drink_record.afternoon_suggestion.display_name %></p>
-        <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.display_name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.morning_suggestion') %>:</strong> <%= @drink_record.morning_suggestion.name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.afternoon_suggestion') %>:</strong> <%= @drink_record.afternoon_suggestion.name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.name %></p>
         <p><strong><%= t('activerecord.attributes.drink_record.caffeine_total') %>:</strong> <%= @drink_record.caffeine_total %>mg</p>
         <% if @drink_record.caffeine_total > current_user.calculate_caffeine_limit.to_i %>
             <div class="attention-icon">

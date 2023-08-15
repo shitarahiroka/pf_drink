@@ -1,6 +1,3 @@
 class Drink < ApplicationRecord
-    attr_accessor :study_time, :calorie_preference
-    def display_name
-        name
-    end
+  attr_accessor :study_time, :calorie_preference
 end

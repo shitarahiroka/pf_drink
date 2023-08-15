@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :drink_records, only: %i[create show edit update destroy]
   resources :password_resets, only: %i[new create edit update]
   # Defines the root path route ("/")
-  root "tops#index"
+  root 'tops#index'
 end
