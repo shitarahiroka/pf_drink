@@ -77,3 +77,6 @@ gem 'dockerfile-rails', '>= 1.5', group: :development
 group :production do
   gem 'pg', '~> 1.5'
 end
+
+gem 'line-bot-api'
+gem 'dotenv-rails'

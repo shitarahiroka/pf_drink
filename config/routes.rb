@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'profile/:id/edit', to: 'profiles#edit', as: 'edit_profile'
   patch 'profile/:id', to: 'profiles#update'
   get 'mypage/calendar'
+  post '/callback', to: 'line_bot_messages#callback'
 
   resources :users, only: %i[new create]
   resources :profile, only: %i[show edit update]
