@@ -33,6 +33,19 @@ class LineBotMessagesController < ApplicationController
     render plain: 'OK', status: :ok
   end
 
+  def account_link_event
+    event = params["events"][0]
+    line_user_id = event["source"]["userId"]
+    if event["type"] == "accountLink" && event["link"]["result"] == "ok"
+      # アカウント連携成功時の処理
+      user = User.find_by(line_user_id: line_user_id)
+      if user
+        user.update(line_user_id: nil) # line_user_idを連携成功後はnilに更新するなどの処理
+        # 他の必要な処理を追加
+      end
+    end
+  end
+
   private
 
   def handle_text_message(event)

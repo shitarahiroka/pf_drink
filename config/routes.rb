@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   patch 'profile/:id', to: 'profiles#update'
   get 'mypage/calendar'
   post '/callback', to: 'line_bot_messages#callback'
+  get 'line_login/login', to: 'line_login#login'
+  get 'line_login/callback', to: 'line_login#callback'
+  get 'line_login/add_friend', to: 'line_login#add_friend'
+  get 'users/link_line_account', to: 'users#link_line_account', as: :link_line_account
 
   resources :users, only: %i[new create]
   resources :profile, only: %i[show edit update]
