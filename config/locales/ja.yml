@@ -31,6 +31,8 @@ ja:
       title: プロフィール
       edit: 編集
       caffeine_limit: 1日のカフェイン制限量
+      line: LINE登録
+      lined: LINE登録済み
     update:
       success: プロフィールを変更しました
       fail: プロフィールの変更に失敗しました

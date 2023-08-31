@@ -50,13 +50,52 @@ class LineBotMessagesController < ApplicationController
 
   def handle_text_message(event)
     text = event.message['text']
-    reply_message(event, text)
+
+    if text == "今日のドリンク記録"
+      send_drink_record_notification(event)
+    else
+      send_default_reply(event)
+    end
   end
 
-  def reply_message(event, text)
+  def send_drink_record_notification(event)
+    user = User.find_by(line_user_id: event['source']['userId'])
+    today = Date.current
+    drink_records = user.drink_records.where(date: today.beginning_of_day..today.end_of_day)
+
+    if drink_records.present?
+      total_caffeine = drink_records.sum(:caffeine_total)
+
+      drink_records_messages = drink_records.map do |record|
+        morning_drink = Drink.find_by(id: record.morning_suggestion)
+        afternoon_drink = Drink.find_by(id: record.afternoon_suggestion)
+        evening_drink = Drink.find_by(id: record.evening_suggestion)
+
+        "朝: #{morning_drink&.name} (#{morning_drink&.caffeine}mg)\n" +
+        "昼: #{afternoon_drink&.name} (#{afternoon_drink&.caffeine}mg)\n" +
+        "夜: #{evening_drink&.name} (#{evening_drink&.caffeine}mg)"
+      end
+
+      total_message = "合計カフェイン摂取量: #{total_caffeine}mg"
+
+      message = {
+        type: 'text',
+        text: "今日のドリンク記録は以下です：\n#{drink_records_messages.join("\n\n")}\n\n#{total_message}"
+      }
+    else
+      message = {
+        type: 'text',
+        text: "今日のドリンク記録はありません。\nドリンク診断を行うにはメニューからアプリを開いてください。"
+      }
+    end
+
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def send_default_reply(event)
     message = {
       type: 'text',
-      text: text
+      text: "ごめんなさい。メッセージの返信はできません。"
     }
     client.reply_message(event['replyToken'], message)
   end
