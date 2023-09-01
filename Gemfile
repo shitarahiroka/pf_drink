@@ -81,3 +81,4 @@ end
 gem 'line-bot-api'
 gem 'dotenv-rails'
 gem 'typhoeus'
+gem 'whenever', require: false
