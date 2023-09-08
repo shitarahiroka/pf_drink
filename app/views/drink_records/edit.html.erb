@@ -1,28 +1,45 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="text-center" style="background-color: rgba(240, 181, 43, 0.5); padding: 20px;">
         <h1><%= l(@drink_record.date, format: :short) %>のドリンク</h1>
-        <p><strong><%= t('activerecord.attributes.drink_record.morning_suggestion') %>:</strong> <%= @drink_record.morning_suggestion.display_name %></p>
-        <p><strong><%= t('activerecord.attributes.drink_record.afternoon_suggestion') %>:</strong> <%= @drink_record.afternoon_suggestion.display_name %></p>
-        <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.display_name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.morning_suggestion') %>:</strong> <%= @drink_record.morning_suggestion.name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.afternoon_suggestion') %>:</strong> <%= @drink_record.afternoon_suggestion.name %></p>
+        <p><strong><%= t('activerecord.attributes.drink_record.evening_suggestion') %>:</strong> <%= @drink_record.evening_suggestion.name %></p>
         <p><strong><%= t('activerecord.attributes.drink_record.caffeine_total') %>:</strong> <%= @drink_record.caffeine_total %>mg</p>
-
         <%= form_with(model: @drink_record, url: drink_record_path(@drink_record), method: :patch) do |form| %>
             <%= form.hidden_field :date, value: @drink_record.date %>
+            <!-- 星の評価を追加 -->
+            <div class="form-group">
+                <h7>総合評価</h7>
+                <div class="post_form d-flex justify-content-center align-items-center">
+                <%= form.radio_button :overall, 5 , id: 'star1' %>
+                <label for="star1"><span class="text">最高</span>★</label>
 
+                <%= form.radio_button :overall, 4 , id: 'star2' %>
+                <label for="star2"><span class="text">良い</span>★</label>
+
+                <%= form.radio_button :overall, 3 , id: 'star3' %>
+                <label for="star3"><span class="text">普通</span>★</label>
+
+                <%= form.radio_button :overall, 2 , id: 'star4' %>
+                <label for="star4"><span class="text">悪い</span>★</label>
+
+                <%= form.radio_button :overall, 1 , id: 'star5' %>
+                <label for="star5"><span class="text">最悪</span>★</label>
+                </div>
+            </div>
             <!-- ドリンクの編集項目 -->
             <div class="form-group">
                 <%= form.label :morning_suggestion, t('activerecord.attributes.drink_record.morning_suggestion') %>
-                <%= form.select :morning_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.display_name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.morning_suggestion.id) %>
+                <%= form.select :morning_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.morning_suggestion.id) %>
             </div>
             <div class="form-group">
                 <%= form.label :afternoon_suggestion, t('activerecord.attributes.drink_record.afternoon_suggestion') %>
-                <%= form.select :afternoon_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.display_name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.afternoon_suggestion.id) %>
+                <%= form.select :afternoon_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.afternoon_suggestion.id) %>
             </div>
             <div class="form-group">
                 <%= form.label :evening_suggestion, t('activerecord.attributes.drink_record.evening_suggestion') %>
-                <%= form.select :evening_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.display_name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.evening_suggestion.id) %>
+                <%= form.select :evening_suggestion, options_for_select(Drink.all.order(caffeine: :asc).map { |drink| ["#{drink.name} (カフェイン量: #{drink.caffeine}mg)", drink.id] }, @drink_record.evening_suggestion.id) %>
             </div>
-
             <div class="d-flex justify-content-center mt-3">
                 <%= form.submit '更新', class: 'btn btn-blue' %>
                 <div style="width: 5px;"></div>

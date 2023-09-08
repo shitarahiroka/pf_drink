@@ -23,11 +23,22 @@ class PasswordResetsController < ApplicationController
     return not_authenticated if @user.blank?
 
     @user.password_confirmation = params[:user][:password_confirmation]
+
     if @user.change_password(params[:user][:password])
-      redirect_to login_path, success: t('.success')
+      redirect_to_login_with_success
     else
-      flash.now[:danger] = t('.fail')
-      render :edit, status: :unprocessable_entity
+      render_edit_with_failure
     end
+  end
+
+  private
+
+  def redirect_to_login_with_success
+    redirect_to login_path, success: t('.success')
+  end
+
+  def render_edit_with_failure
+    flash.now[:danger] = t('.fail')
+    render :edit, status: :unprocessable_entity
   end
 end

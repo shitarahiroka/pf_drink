@@ -1,0 +1,27 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - bin/*
+    - config/**/*
+
+Layout/IndentationWidth:
+  EnforcedStyle: two_spaces
+
+# Offense count: 32
+# Configuration parameters: AllowedConstants.
+Style/Documentation:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'app/controllers/drinks_controller.rb'
+
+# Offense count: 3
+# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
+# AllowedMethods: refine
+Metrics/BlockLength:
+  Max: 46
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get 'profile/:id/edit', to: 'profiles#edit', as: 'edit_profile'
   patch 'profile/:id', to: 'profiles#update'
   get 'mypage/calendar'
+  post '/callback', to: 'line_bot_messages#callback'
+  get 'line_login/login', to: 'line_login#login'
+  get 'line_login/callback', to: 'line_login#callback'
+  get 'line_login/add_friend', to: 'line_login#add_friend'
+  get 'users/link_line_account', to: 'users#link_line_account', as: :link_line_account
 
   resources :users, only: %i[new create]
   resources :profile, only: %i[show edit update]
@@ -20,5 +25,5 @@ Rails.application.routes.draw do
   resources :drink_records, only: %i[create show edit update destroy]
   resources :password_resets, only: %i[new create edit update]
   # Defines the root path route ("/")
-  root "tops#index"
+  root 'tops#index'
 end
