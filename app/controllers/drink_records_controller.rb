@@ -34,7 +34,7 @@ class DrinkRecordsController < ApplicationController
       caffeine_total = morning_suggestion + afternoon_suggestion + evening_suggestion
 
       # カフェイン総摂取量を更新
-      @drink_record.update(caffeine_total:)
+      @drink_record.update(caffeine_total: caffeine_total)
 
       if caffeine_total > caffeine_limit
         # カフェイン制限を超える場合は更新をキャンセルし、エラーメッセージを表示
@@ -61,10 +61,12 @@ class DrinkRecordsController < ApplicationController
       morning_suggestion_id = params[:drink_record][:morning_suggestion]
       afternoon_suggestion_id = params[:drink_record][:afternoon_suggestion]
       evening_suggestion_id = params[:drink_record][:evening_suggestion]
+      overall = params[:drink_record][:overall] # :overallを追加
     else
       morning_suggestion_id = params[:morning_suggestion]
       afternoon_suggestion_id = params[:afternoon_suggestion]
       evening_suggestion_id = params[:evening_suggestion]
+      overall = params[:overall] # :overallを追加
     end
 
     # ドリンクデータベースから対応するドリンクオブジェクトを取得
@@ -76,7 +78,8 @@ class DrinkRecordsController < ApplicationController
       user: current_user,
       morning_suggestion:,
       afternoon_suggestion:,
-      evening_suggestion:
+      evening_suggestion:,
+      overall: overall
     )
   end
 end
