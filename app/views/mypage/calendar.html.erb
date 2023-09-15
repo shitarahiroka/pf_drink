@@ -19,10 +19,8 @@
       <span class="attention-icon" title="カフェイン制限量を超えています">⚠️</span>
     <% end %>
     <%= link_to "#{drink_record.caffeine_total}mg", "/drink_records/#{drink_record.id}" %>
-    <% if drink_record.overall.present? %>
-      <% stars = "★" * drink_record.overall %>
-      <%= link_to "#{stars}", "/drink_records/#{drink_record.id}" %>
-    <% end %>
+    <% stars = "★" * drink_record.try(:overall).to_i %>
+    <%= link_to "#{stars}", "/drink_records/#{drink_record.id}" unless stars.blank? %>
   <% end %>
 
 <% end %>

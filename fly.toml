@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for intell-drink on 2023-07-27T21:00:52+09:00
+# fly.toml app configuration file generated for intell-drink on 2023-09-11T15:01:36+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -6,6 +6,8 @@
 app = "intell-drink"
 primary_region = "nrt"
 console_command = "/rails/bin/rails console"
+
+[build]
 
 [deploy]
   release_command = "./bin/rails db:prepare"
