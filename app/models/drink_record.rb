@@ -9,4 +9,5 @@ class DrinkRecord < ApplicationRecord
   validates :caffeine_total, presence: true
   validates :date, presence: true
   validates :user_id, uniqueness: { scope: :date, message: 'すでに今日のドリンクは記録しています。' }
+  attribute :overall, :integer
 end

@@ -63,6 +63,11 @@ ja:
     edit:
       title: パスワードリセット
       submit: 送信
+  line_login:
+    callback:
+      success: LINEユーザーIDが登録されました！
+      fail: LINEユーザーIDの登録に失敗しました。
+      unauthorized_access: 不正なアクセスです。
 
   activerecord:
     errors:
